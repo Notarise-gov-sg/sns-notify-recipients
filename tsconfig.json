@@ -12,6 +12,7 @@
       "noImplicitReturns": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
-      "stripInternal": true
+      "stripInternal": true,
+      "allowSyntheticDefaultImports": true
     }
   }
