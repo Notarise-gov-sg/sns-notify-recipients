@@ -27,7 +27,8 @@
     "commit:retry": "git-cz --retry",
     "commitmsg": "commitlint -e",
     "commitlint-circle": "commitlint-circle",
-    "upgrade-deps": "npx updtr"
+    "upgrade-deps": "npx updtr",
+    "prepare": "husky install"
   },
   "types": "dist/ts",
   "husky": {
