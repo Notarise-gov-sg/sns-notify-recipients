@@ -1,7 +1,9 @@
 {
     "compilerOptions": {
       "resolveJsonModule": true,
-      "outDir": "dist/ts",
+      "outDir": "./dist",
+      "rootDirs": ["./", "./src"],
+      "typeRoots": ["./src/types.ts", "./@types", "node_modules/@types"],
       "target": "esnext",
       "module": "esnext",
       "moduleResolution": "node",

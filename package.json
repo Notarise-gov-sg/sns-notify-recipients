@@ -4,7 +4,8 @@
   "description": "Send SNS notifications with templates",
   "license": "MIT",
   "repository": "Notarise-gov-sg/sns-notify-recipients",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "author": "",
   "files": [
     "dist",
@@ -30,7 +31,6 @@
     "upgrade-deps": "npx updtr",
     "prepare": "husky install"
   },
-  "types": "dist/ts",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
