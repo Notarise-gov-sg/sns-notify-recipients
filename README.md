@@ -32,7 +32,6 @@ try {
 Remember to set the following environment variables:
 
 ```text
-NOTIFICATION_ENABLED=true
 NOTIFICATION_TOPIC_ARN=arn:aws:sns:ap-southeast-1:000000000000:PLACEHOLDER_SNS_TOPIC
 NOTIFICATION_SENDER_NAME=MOH
 NOTIFICATION_SENDER_LOGO=""
