@@ -1,3 +1,4 @@
+import QrCode from "qrcode";
 import { publish } from "../../services/sns";
 import { getSpmTemplateInput, SpmPayload } from "./notification";
 import { config } from "../../config";
@@ -8,31 +9,20 @@ const { trace } = getLogger("src/models/notifyRecipient");
 
 interface NotifyRecipientProps {
   url: string;
-  qrCode: string;
   nric?: string;
   passportNumber: string;
   testData: TestData[];
   validFrom: string;
 }
 
-export const notifyRecipient = async ({
-  url,
-  qrCode,
-  nric,
-  passportNumber,
-  testData,
-  validFrom,
-}: NotifyRecipientProps) => {
-  if (!config.notification.enabled) {
-    trace(`Notification is disabled: Enable it by setting NOTIFICATION_ENABLED=true`);
-    return;
-  }
-
+export const notifyRecipient = async ({ url, nric, passportNumber, testData, validFrom }: NotifyRecipientProps) => {
   if (!nric) {
     trace("Skipping SPM notification as the cert doesnt contain an NRIC");
     return;
   }
-  const template = getSpmTemplateInput(qrCode, passportNumber, testData, validFrom);
+  const qrCode = await QrCode.toBuffer(url);
+  const qrCodeStr = `data:image/png;base64, ${qrCode.toString("base64")}`;
+  const template = getSpmTemplateInput(qrCodeStr, passportNumber, testData, validFrom);
   const notification: SpmPayload = {
     notification_req: {
       uin: nric,
