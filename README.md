@@ -1,13 +1,13 @@
 # sns-notify-recipients
 
-Send SNS notifications with templates
+Send SNS notifications with templates.
 
 ## Installation
 
 To install with npm, run this in your service directory:
 
 ```bash
-npm install https://github.com/Notarise-gov-sg/sns-notify-recipients/tarball/release/v1.0.0
+npm install @notarise-gov-sg/sns-notify-recipients
 ```
 
 ## Usage
@@ -44,20 +44,8 @@ NOTIFICATION_TEMPLATE_ID=000
 
 2. Raise a PR.
 
-3. Upon approval, merge PR into master branch.
+3. Upon approval, merge PR into `master` branch.
 
-4. Bump `package.json` version of master branch:
+4. GitHub Actions will automatically bump version in `package.json` and tag.
 
-   ```bash
-   npm version patch
-   ```
-
-5. Create a new release on GitHub:
-
-   a. Go to `https://github.com/Notarise-gov-sg/sns-notify-recipients` and click on create new release.
-
-   b. Enter release tag (v1.x.x), title and description.
-
-   c. Publish release.
-
-   d. GitHub Actions workflow will automatically commit to release branch.
+5. After version bump, publish package to NPM by manually running `CI - Publish` workflow in GitHub Actions.
