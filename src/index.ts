@@ -1,3 +1,4 @@
 import { notifyRecipient } from "./models/notifyRecipient";
+import { healthCheck } from "./util/healthCheck";
 
-export { notifyRecipient };
+export { notifyRecipient, healthCheck };
