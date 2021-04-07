@@ -1,15 +1,17 @@
 {
   "name": "@notarise-gov-sg/sns-notify-recipients",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Send SNS notifications with templates",
   "license": "MIT",
-  "repository": "Notarise-gov-sg/sns-notify-recipients",
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Notarise-gov-sg/sns-notify-recipients.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "author": "",
   "files": [
-    "dist",
-    "src"
+    "dist/**/*"
   ],
   "scripts": {
     "type-check": "tsc --noEmit",

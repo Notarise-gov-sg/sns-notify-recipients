@@ -1,7 +1,6 @@
 import debug from "debug";
-import { name } from "../../package.json"; // automatically set logger namespace to package.json name
 
-export const LOGGER_NAMESPACE = name;
+export const LOGGER_NAMESPACE = "sns-notify-recipients";
 
 const logger = debug(LOGGER_NAMESPACE);
 
