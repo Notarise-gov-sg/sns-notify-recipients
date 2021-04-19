@@ -118,7 +118,7 @@ export const getSpmTemplateInput = (
               ? "COVID-19 SEROLOGY TEST RESULT"
               : testData[0].testType,
           testdatetime: testData[0].swabCollectionDate,
-          testresult2: testData[0].testResult,
+          testresult2: testData[1].testResult,
           testtype2:
             testData[1].testType === "REAL TIME RT-PCR SWAB"
               ? "COVID-19 PCR TEST RESULT"
