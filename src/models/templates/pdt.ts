@@ -74,7 +74,7 @@ export type SpmPayload = Static<typeof spmPayloadDef>;
 
 type SpmTemplate = Static<typeof templateV2 | typeof templateV3>;
 
-export const getSpmTemplateInput = (
+export const getSpmTemplateV2V3 = (
   qrCode: string,
   passportNumber: string,
   testData: TestData[],

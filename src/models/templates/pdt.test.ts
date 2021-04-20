@@ -1,4 +1,4 @@
-import { getSpmTemplateInput } from "./notification";
+import { getSpmTemplateV2V3 } from "./pdt";
 import { TestData } from "../../types";
 
 const mockTestData: TestData = {
@@ -19,9 +19,9 @@ const mockTestData: TestData = {
   testResult: "Negative",
 };
 
-describe("notifyRecipient", () => {
-  it("should create the right template message if there is 1 tests", async () => {
-    expect(getSpmTemplateInput("somestring", "E7831177G", [mockTestData], "2020-11-16T06:26:19.160Z")).toStrictEqual({
+describe("notifyPdt", () => {
+  it("should create the right template message for SAFETRAVEL-QR-NTF-02 (if there is 1 test)", async () => {
+    expect(getSpmTemplateV2V3("somestring", "E7831177G", [mockTestData], "2020-11-16T06:26:19.160Z")).toStrictEqual({
       template_id: "SAFETRAVEL-QR-NTF-02",
       template_input: {
         date: "2020-11-16T06:26:19.160Z",
@@ -36,9 +36,9 @@ describe("notifyRecipient", () => {
     });
   });
 
-  it("should create the right notification message if there are 2 tests", async () => {
+  it("should create the right template message for SAFETRAVEL-QR-NTF-03 (if there are 2 tests)", async () => {
     expect(
-      getSpmTemplateInput(
+      getSpmTemplateV2V3(
         "somestring",
         "E7831177G",
         [

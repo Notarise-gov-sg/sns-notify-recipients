@@ -1,13 +1,13 @@
 import QrCode from "qrcode";
 import { publish } from "../../services/sns";
-import { getSpmTemplateInput, SpmPayload } from "./notification";
+import { getSpmTemplateV2V3, SpmPayload } from "../templates/pdt";
 import { config } from "../../config";
 import { getLogger } from "../../util/logger";
 import { TestData } from "../../types";
 
-const { trace } = getLogger("src/models/notifyRecipient");
+const { trace } = getLogger("src/models/notifyPdt");
 
-interface NotifyRecipientProps {
+interface NotifyPdtProps {
   url: string;
   nric?: string;
   passportNumber: string;
@@ -15,14 +15,14 @@ interface NotifyRecipientProps {
   validFrom: string;
 }
 
-export const notifyRecipient = async ({ url, nric, passportNumber, testData, validFrom }: NotifyRecipientProps) => {
+export const notifyPdt = async ({ url, nric, passportNumber, testData, validFrom }: NotifyPdtProps) => {
   if (!nric) {
     trace("Skipping SPM notification as the cert doesnt contain an NRIC");
     return;
   }
   const qrCode = await QrCode.toBuffer(url);
   const qrCodeStr = `data:image/png;base64, ${qrCode.toString("base64")}`;
-  const template = getSpmTemplateInput(qrCodeStr, passportNumber, testData, validFrom);
+  const template = getSpmTemplateV2V3(qrCodeStr, passportNumber, testData, validFrom);
   const notification: SpmPayload = {
     notification_req: {
       uin: nric,

@@ -15,13 +15,13 @@ npm install @notarise-gov-sg/sns-notify-recipients
 Import package where required:
 
 ```javascript
-import { notifyRecipients } from "sns-notifiy-recipients";
+import { notifyPdt } from "sns-notifiy-recipients";
 
 // ...
 
 try {
   /* Notify recipient */
-  await notifyRecipient(payload);
+  await notifyPdt(payload);
 } catch (e) {
   errorWithRef(`Notification error: ${e.message}`);
 }

@@ -1,4 +1,4 @@
-import { notifyRecipient } from "./models/notifyRecipient";
+import { notifyPdt } from "./models/notifyPdt";
 import { healthCheck } from "./util/healthCheck";
 
-export { notifyRecipient, healthCheck };
+export { notifyPdt, healthCheck };
