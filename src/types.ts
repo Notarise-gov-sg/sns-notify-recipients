@@ -16,3 +16,12 @@ export interface TestData {
   gender: string;
   testResult: string;
 }
+
+export interface Vaccination {
+  vaccineCode: string;
+  vaccineName: string;
+  vaccineLot: string;
+  vaccinationDateTime: string;
+  vaccinationLocationCode: string;
+  vaccinationCountry: string;
+}
