@@ -60,7 +60,8 @@ export const getSpmTemplateV4 = (
   qrCode: string,
   passportNumber: string,
   vaccinations: Vaccination[],
-  validFrom: string
+  validFrom: string,
+  vaccinationEffectiveDate: string
 ): SpmTemplate => {
   const { validityInDays } = config.vaccination;
   const expiryts = new Date(validFrom);
@@ -70,11 +71,11 @@ export const getSpmTemplateV4 = (
     template_id: "SAFETRAVEL-QR-NTF-04",
     template_input: {
       qrissuedts: validFrom,
-      qrexpiryts: expiryts.toISOString(),
+      qrexpiryts: expiryts.toISOString(), // TODO: Convert to DD MMM YYY in SGT
       name,
       travelpassport: passportNumber,
       vaccname: vaccinations[0].vaccineName,
-      vaccdate: vaccinations[0].vaccinationDateTime,
+      vaccdate: vaccinationEffectiveDate, // TODO: Convert to DD MMM YYY in SGT
       qrcode: qrCode,
     },
   };

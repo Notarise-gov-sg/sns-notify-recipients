@@ -53,6 +53,7 @@ describe("notifyVaccine", () => {
       nric: "S9098989Z",
       passportNumber: "E7831177G",
       vaccinations: [mockVaccination],
+      vaccinationEffectiveDate: "2021-04-01T08:00:00.000Z",
     });
     expect(mockPublish.mock.calls[0]).toMatchInlineSnapshot(
       `
@@ -81,7 +82,7 @@ describe("notifyVaccine", () => {
                   "qrexpiryts": "2021-04-15T00:00:00.000Z",
                   "qrissuedts": "2021-04-01T00:00:00.000Z",
                   "travelpassport": "E7831177G",
-                  "vaccdate": "2020-11-16T06:26:19.160Z",
+                  "vaccdate": "2021-04-01T08:00:00.000Z",
                   "vaccname": "vaccineName",
                 },
               },

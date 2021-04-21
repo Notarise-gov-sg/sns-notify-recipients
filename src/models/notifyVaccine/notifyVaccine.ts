@@ -14,6 +14,7 @@ interface NotifyVaccineProps {
   passportNumber: string;
   vaccinations: Vaccination[];
   validFrom: string;
+  vaccinationEffectiveDate: string;
 }
 
 export const notifyVaccine = async ({
@@ -23,6 +24,7 @@ export const notifyVaccine = async ({
   passportNumber,
   vaccinations,
   validFrom,
+  vaccinationEffectiveDate,
 }: NotifyVaccineProps) => {
   if (!nric) {
     trace("Skipping SPM notification as the cert doesnt contain an NRIC");
@@ -30,7 +32,7 @@ export const notifyVaccine = async ({
   }
   const qrCode = await QrCode.toBuffer(url);
   const qrCodeStr = `data:image/png;base64, ${qrCode.toString("base64")}`;
-  const template = getSpmTemplateV4(name, qrCodeStr, passportNumber, vaccinations, validFrom);
+  const template = getSpmTemplateV4(name, qrCodeStr, passportNumber, vaccinations, validFrom, vaccinationEffectiveDate);
   const notification: SpmPayload = {
     notification_req: {
       uin: nric,

@@ -13,16 +13,23 @@ const mockVaccination: Vaccination = {
 describe("notifyVaccine", () => {
   it("should create the right template message for SAFETRAVEL-QR-NTF-04", async () => {
     expect(
-      getSpmTemplateV4("Person", "somestring", "E7831177G", [mockVaccination], "2021-04-01T00:00:00.000Z")
+      getSpmTemplateV4(
+        "Person",
+        "somestring",
+        "E7831177G",
+        [mockVaccination],
+        "2021-04-01T08:00:00.000Z",
+        "2021-04-01T08:00:00.000Z"
+      )
     ).toStrictEqual({
       template_id: "SAFETRAVEL-QR-NTF-04",
       template_input: {
-        qrissuedts: "2021-04-01T00:00:00.000Z",
-        qrexpiryts: "2021-04-15T00:00:00.000Z",
+        qrissuedts: "2021-04-01T08:00:00.000Z",
+        qrexpiryts: "2021-04-15T08:00:00.000Z",
         name: "Person",
         travelpassport: "E7831177G",
         vaccname: mockVaccination.vaccineName,
-        vaccdate: mockVaccination.vaccinationDateTime,
+        vaccdate: "2021-04-01T08:00:00.000Z",
         qrcode: "somestring",
       },
     });
