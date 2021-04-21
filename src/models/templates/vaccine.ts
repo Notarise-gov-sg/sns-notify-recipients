@@ -3,6 +3,7 @@
 import { Static, String, Literal, Array, Record, Union } from "runtypes";
 import { Vaccination } from "../../types";
 import { config } from "../../config";
+import { dateFormatter } from "../../util/dateFormatter";
 
 const channel_mode = Union(Literal("SPM"), Literal("SPMORSMS"));
 const delivery = Union(Literal("IMMEDIATE"), Literal("SCHEDULE"));
@@ -64,18 +65,22 @@ export const getSpmTemplateV4 = (
   vaccinationEffectiveDate: string
 ): SpmTemplate => {
   const { validityInDays } = config.vaccination;
+
+  const issuedts = new Date(validFrom);
   const expiryts = new Date(validFrom);
   expiryts.setDate(expiryts.getDate() + validityInDays);
+
+  const vaccdate = new Date(vaccinationEffectiveDate);
 
   return {
     template_id: "SAFETRAVEL-QR-NTF-04",
     template_input: {
-      qrissuedts: validFrom,
-      qrexpiryts: expiryts.toISOString(), // TODO: Convert to DD MMM YYY in SGT
+      qrissuedts: dateFormatter.format(issuedts),
+      qrexpiryts: dateFormatter.format(expiryts),
       name,
       travelpassport: passportNumber,
       vaccname: vaccinations[0].vaccineName,
-      vaccdate: vaccinationEffectiveDate, // TODO: Convert to DD MMM YYY in SGT
+      vaccdate: dateFormatter.format(vaccdate),
       qrcode: qrCode,
     },
   };
