@@ -2,8 +2,7 @@
 /* copied from https://github.com/Notarise-gov-sg/api-notify/blob/master/src/model/notification/index.ts */
 import { Static, String, Literal, Array, Record, Union } from "runtypes";
 import { Vaccination } from "../../types";
-import { config } from "../../config";
-import { dateToStr } from "../../util/dateFormatter";
+import { dateToStr, calcExpiry } from "../../util/date";
 
 const channel_mode = Union(Literal("SPM"), Literal("SPMORSMS"));
 const delivery = Union(Literal("IMMEDIATE"), Literal("SCHEDULE"));
@@ -64,12 +63,8 @@ export const getSpmTemplateV4 = (
   validFrom: string,
   vaccinationEffectiveDate: string
 ): SpmTemplate => {
-  const { validityInDays } = config.vaccination;
-
   const issuedts = new Date(validFrom);
-  const expiryts = new Date(validFrom);
-  expiryts.setDate(expiryts.getDate() + validityInDays);
-
+  const expiryts = calcExpiry(issuedts);
   const vaccdate = new Date(vaccinationEffectiveDate);
 
   return {
