@@ -18,8 +18,8 @@ describe("notifyVaccine", () => {
         "somestring",
         "E7831177G",
         [mockVaccination],
-        "2021-04-01T08:00:00.000Z",
-        "2021-04-01T08:00:00.000Z"
+        "2021-03-31T16:01:00.000Z",
+        "2021-03-31T16:01:00.000Z"
       )
     ).toStrictEqual({
       template_id: "SAFETRAVEL-QR-NTF-04",

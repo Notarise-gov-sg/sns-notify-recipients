@@ -48,12 +48,12 @@ describe("notifyVaccine", () => {
     mockPublish.mockResolvedValue({ MessageId: "foobar" });
     await notifyVaccine({
       name: "Person",
-      validFrom: "2021-04-01T00:00:00.000Z",
+      validFrom: "2021-03-31T16:01:00.000Z",
       url: "https://foo.bar/uuid",
       nric: "S9098989Z",
       passportNumber: "E7831177G",
       vaccinations: [mockVaccination],
-      vaccinationEffectiveDate: "2021-04-01T08:00:00.000Z",
+      vaccinationEffectiveDate: "2021-03-31T16:01:00.000Z",
     });
     expect(mockPublish.mock.calls[0]).toMatchInlineSnapshot(
       `
