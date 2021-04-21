@@ -29,6 +29,9 @@ const generateConfig = () => ({
       "arn:aws:sns:ap-southeast-1:000000000000:PLACEHOLDER_SNS_TOPIC"
     ),
   },
+  vaccination: {
+    validityInDays: 14,
+  },
 });
 
 export const config = generateConfig();

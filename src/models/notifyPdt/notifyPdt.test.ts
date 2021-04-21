@@ -1,5 +1,5 @@
 import healthcertWithNric from "../../../test/fixtures/example_notarized_healthcert_with_nric_wrapped.json";
-import { notifyRecipient } from "./notifyRecipient";
+import { notifyPdt } from "./notifyPdt";
 import { publish } from "../../services/sns";
 import { TestData } from "../../types";
 
@@ -48,13 +48,13 @@ const mockTestData: TestData = {
   testResult: "Negative",
 };
 
-describe("notifyRecipient", () => {
+describe("notifyPdt", () => {
   beforeEach(() => {
     mockPublish.mockReset();
   });
   it("should send the right SPM notification if healthcert contains an NRIC", async () => {
     mockPublish.mockResolvedValue({ MessageId: "foobar" });
-    await notifyRecipient({
+    await notifyPdt({
       validFrom: "2020-11-16T06:26:19.160Z",
       url: "https://foo.bar/uuid",
       nric: "S9098989Z",
@@ -108,7 +108,7 @@ describe("notifyRecipient", () => {
     // remove nric identifier
     healthcertWithoutNric.data.fhirBundle.entry[0].identifier = [passportNumberIdentifier];
 
-    await notifyRecipient({
+    await notifyPdt({
       validFrom: "2020-11-16T06:26:19.160Z",
       url: "https://foo.bar/uuid",
       passportNumber: "E7831177G",
@@ -125,7 +125,7 @@ describe("notifyRecipient", () => {
   });
   it("should create the right notification message if there are 2 tests", async () => {
     mockPublish.mockResolvedValue({ MessageId: "foobar" });
-    await notifyRecipient({
+    await notifyPdt({
       validFrom: "2020-11-16T06:26:19.160Z",
       url: "https://foo.bar/uuid",
       nric: "S9098989Z",

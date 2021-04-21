@@ -1,28 +1,38 @@
 import QrCode from "qrcode";
 import { publish } from "../../services/sns";
-import { getSpmTemplateInput, SpmPayload } from "./notification";
+import { getSpmTemplateV4, SpmPayload } from "../templates/vaccine";
 import { config } from "../../config";
 import { getLogger } from "../../util/logger";
-import { TestData } from "../../types";
+import { Vaccination } from "../../types";
 
 const { trace } = getLogger("src/models/notifyRecipient");
 
-interface NotifyRecipientProps {
+interface NotifyVaccineProps {
+  name: string;
   url: string;
   nric?: string;
   passportNumber: string;
-  testData: TestData[];
+  vaccinations: Vaccination[];
   validFrom: string;
+  vaccinationEffectiveDate: string;
 }
 
-export const notifyRecipient = async ({ url, nric, passportNumber, testData, validFrom }: NotifyRecipientProps) => {
+export const notifyVaccine = async ({
+  name,
+  url,
+  nric,
+  passportNumber,
+  vaccinations,
+  validFrom,
+  vaccinationEffectiveDate,
+}: NotifyVaccineProps) => {
   if (!nric) {
     trace("Skipping SPM notification as the cert doesnt contain an NRIC");
     return;
   }
   const qrCode = await QrCode.toBuffer(url);
   const qrCodeStr = `data:image/png;base64, ${qrCode.toString("base64")}`;
-  const template = getSpmTemplateInput(qrCodeStr, passportNumber, testData, validFrom);
+  const template = getSpmTemplateV4(name, qrCodeStr, passportNumber, vaccinations, validFrom, vaccinationEffectiveDate);
   const notification: SpmPayload = {
     notification_req: {
       uin: nric,
