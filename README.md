@@ -19,10 +19,26 @@ import { notifyPdt, notifyVaccine } from "sns-notifiy-recipients";
 
 try {
   /* Notify recipient of PDT */
-  await notifyPdt(payload);
+  interface NotifyPdtProps {
+    url: string;
+    nric?: string;
+    passportNumber: string;
+    testData: TestData[];
+    validFrom: string; // ISO String
+  }
+  await notifyPdt(notifyPdtProps);
 
   /* Notify recipient of Vaccination */
-  await notifyVaccine(payload);
+  interface NotifyVaccineProps {
+    name: string;
+    url: string;
+    nric?: string;
+    passportNumber: string;
+    vaccinations: Vaccination[];
+    validFrom: string; // ISO String
+    vaccinationEffectiveDate: string; // ISO String
+  }
+  await notifyVaccine(notifyVaccineProps);
 } catch (e) {
   errorWithRef(`Notification error: ${e.message}`);
 }
