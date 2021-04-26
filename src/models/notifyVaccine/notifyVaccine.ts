@@ -39,7 +39,7 @@ export const notifyVaccine = async ({
       channel_mode: "SPM",
       delivery: "IMMEDIATE",
       template_layout: [template],
-      title: "Your notarised HealthCert is ready",
+      title: "COVID-19 Vaccination (Verified copy)",
       sender_name: config.notification.senderName,
       sender_logo_small: config.notification.senderLogo,
       category: "MESSAGES",
