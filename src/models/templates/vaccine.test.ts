@@ -24,12 +24,12 @@ describe("notifyVaccine", () => {
     ).toStrictEqual({
       template_id: "SAFETRAVEL-QR-NTF-04",
       template_input: {
-        qrissuedts: "Apr 1, 2021",
-        qrexpiryts: "Apr 15, 2021",
+        qrissuedts: "1 Apr 2021",
+        qrexpiryts: "15 Apr 2021",
         name: "Person",
         travelpassport: "E7831177G",
         vaccname: mockVaccination.vaccineName,
-        vaccdate: "Apr 1, 2021",
+        vaccdate: "1 Apr 2021",
         qrcode: "somestring",
       },
     });
