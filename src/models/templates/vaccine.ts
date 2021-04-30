@@ -2,7 +2,7 @@
 /* copied from https://github.com/Notarise-gov-sg/api-notify/blob/master/src/model/notification/index.ts */
 import { Static, String, Literal, Array, Record, Union } from "runtypes";
 import { Vaccination } from "../../types";
-import { dateToStr, calcExpiry } from "../../util/date";
+import { dateToStr } from "../../util/date";
 
 const channel_mode = Union(Literal("SPM"), Literal("SPMORSMS"));
 const delivery = Union(Literal("IMMEDIATE"), Literal("SCHEDULE"));
@@ -64,14 +64,13 @@ export const getSpmTemplateV4 = (
   vaccinationEffectiveDate: string
 ): SpmTemplate => {
   const issuedts = new Date(validFrom);
-  const expiryts = calcExpiry(issuedts);
   const vaccdate = new Date(vaccinationEffectiveDate);
 
   return {
     template_id: "SAFETRAVEL-QR-NTF-04",
     template_input: {
       qrissuedts: dateToStr(issuedts),
-      qrexpiryts: dateToStr(expiryts),
+      qrexpiryts: "Not Applicable",
       name,
       travelpassport: passportNumber,
       vaccname: vaccinations[0].vaccineName,

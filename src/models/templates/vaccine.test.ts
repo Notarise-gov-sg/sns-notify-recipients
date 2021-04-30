@@ -25,7 +25,7 @@ describe("notifyVaccine", () => {
       template_id: "SAFETRAVEL-QR-NTF-04",
       template_input: {
         qrissuedts: "1 April 2021",
-        qrexpiryts: "15 April 2021",
+        qrexpiryts: "Not Applicable",
         name: "Person",
         travelpassport: "E7831177G",
         vaccname: mockVaccination.vaccineName,
