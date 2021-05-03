@@ -63,6 +63,6 @@ NOTIFICATION_TEMPLATE_ID=000
 
 3. Upon approval, merge PR into `master` branch.
 
-4. GitHub Actions will automatically bump version in `package.json` and tag.
+4. Wait for tests on `CI - Master` to complete.
 
-5. After version bump, publish package to NPM by manually running `CI - Publish` workflow in GitHub Actions.
+5. Publish a release to NPM by manually running `CI - Release` workflow in GitHub Actions.
