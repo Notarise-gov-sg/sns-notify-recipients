@@ -1,3 +1,4 @@
+import NRIC from "nric";
 import healthcertWithNric from "../../../test/fixtures/example_notarized_healthcert_with_nric_wrapped.json";
 import { notifyPdt } from "./notifyPdt";
 import { publish } from "../../services/sns";
@@ -29,6 +30,8 @@ jest.mock("../../config", () => ({
   },
 }));
 
+const nric = NRIC.generateNRIC();
+
 const mockPublish = publish as jest.Mock;
 const mockTestData: TestData = {
   provider: "{}",
@@ -39,7 +42,7 @@ const mockTestData: TestData = {
   performerName: "",
   performerMcr: "",
   observationDate: "",
-  nric: "a",
+  nric,
   nationality: "",
   gender: "",
   passportNumber: "",
@@ -57,7 +60,7 @@ describe("notifyPdt", () => {
     await notifyPdt({
       validFrom: "2020-11-16T06:26:19.160Z",
       url: "https://foo.bar/uuid",
-      nric: "S9098989Z",
+      nric,
       passportNumber: "E7831177G",
       testData: [mockTestData],
     });
@@ -94,7 +97,7 @@ describe("notifyPdt", () => {
               },
             ],
             "title": "Your notarised HealthCert is ready",
-            "uin": "S9098989Z",
+            "uin": "${nric}",
           },
         },
       ]
@@ -108,27 +111,32 @@ describe("notifyPdt", () => {
     // remove nric identifier
     healthcertWithoutNric.data.fhirBundle.entry[0].identifier = [passportNumberIdentifier];
 
-    await notifyPdt({
-      validFrom: "2020-11-16T06:26:19.160Z",
-      url: "https://foo.bar/uuid",
-      passportNumber: "E7831177G",
-      testData: [
-        mockTestData,
-        {
-          ...mockTestData,
-          swabCollectionDate: "testdatetime2",
-          testType: "test2",
-        },
-      ],
-    });
-    expect(mockPublish).not.toHaveBeenCalled();
+    try {
+      await notifyPdt({
+        validFrom: "2020-11-16T06:26:19.160Z",
+        url: "https://foo.bar/uuid",
+        passportNumber: "E7831177G",
+        testData: [
+          mockTestData,
+          {
+            ...mockTestData,
+            swabCollectionDate: "testdatetime2",
+            testType: "test2",
+          },
+        ],
+      });
+    } catch (error) {
+      // error should occu
+    } finally {
+      expect(mockPublish).not.toHaveBeenCalled();
+    }
   });
   it("should create the right notification message if there are 2 tests", async () => {
     mockPublish.mockResolvedValue({ MessageId: "foobar" });
     await notifyPdt({
       validFrom: "2020-11-16T06:26:19.160Z",
       url: "https://foo.bar/uuid",
-      nric: "S9098989Z",
+      nric,
       passportNumber: "E7831177G",
       testData: [
         mockTestData,
@@ -175,7 +183,7 @@ describe("notifyPdt", () => {
               },
             ],
             "title": "Your notarised HealthCert is ready",
-            "uin": "S9098989Z",
+            "uin": "${nric}",
           },
         },
       ]
