@@ -1,6 +1,6 @@
 import NRIC from "nric";
 
-import { getLogger } from "./logger";
+import { getLogger } from "../../util/logger";
 
 const { error } = getLogger("src/notifyRecipient/nricValidation");
 

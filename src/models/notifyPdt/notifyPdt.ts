@@ -4,7 +4,7 @@ import { getSpmTemplateV2V3, SpmPayload } from "../templates/pdt";
 import { config } from "../../config";
 import { getLogger } from "../../util/logger";
 import { TestData } from "../../types";
-import { isNRICValid } from "../../util/nricValidation";
+import { isNRICValid } from "../../services/validateNRIC";
 
 const { trace } = getLogger("src/models/notifyPdt");
 

@@ -100,19 +100,16 @@ describe("notifyVaccine", () => {
   });
 
   it("should skip sending an SPM notification if healthcert does not contain an NRIC", async () => {
-    try {
-      await notifyVaccine({
+    await expect(
+      notifyVaccine({
         name: "Person",
         validFrom: "2021-04-01T00:00:00.000Z",
         url: "https://foo.bar/uuid",
         passportNumber: "E7831177G",
         vaccinations: [mockVaccination],
         vaccinationEffectiveDate: "2021-04-01T08:00:00.000Z",
-      });
-    } catch (error) {
-      // error should occur
-    } finally {
-      expect(mockPublish).not.toHaveBeenCalled();
-    }
+      })
+    ).rejects.toThrow("Skipped SPM notification for reasons mentioned above in isNRICValid()");
+    expect(mockPublish).not.toHaveBeenCalled();
   });
 });

@@ -4,7 +4,7 @@ import { getSpmTemplateV4, SpmPayload } from "../templates/vaccine";
 import { config } from "../../config";
 import { getLogger } from "../../util/logger";
 import { Vaccination } from "../../types";
-import { isNRICValid } from "../../util/nricValidation";
+import { isNRICValid } from "../../services/validateNRIC";
 
 const { trace } = getLogger("src/models/notifyRecipient");
 

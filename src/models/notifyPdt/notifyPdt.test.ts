@@ -111,8 +111,8 @@ describe("notifyPdt", () => {
     // remove nric identifier
     healthcertWithoutNric.data.fhirBundle.entry[0].identifier = [passportNumberIdentifier];
 
-    try {
-      await notifyPdt({
+    await expect(
+      notifyPdt({
         validFrom: "2020-11-16T06:26:19.160Z",
         url: "https://foo.bar/uuid",
         passportNumber: "E7831177G",
@@ -124,13 +124,30 @@ describe("notifyPdt", () => {
             testType: "test2",
           },
         ],
+      })
+    ).rejects.toThrow("Skipped SPM notification for reasons mentioned above in isNRICValid()");
+
+    expect(mockPublish).not.toHaveBeenCalled();
+  });
+
+  it("should skip sending an SPM notification if nric fails checksum", async () => {
+    mockPublish.mockResolvedValue({ MessageId: "foobar" });
+    try {
+      await notifyPdt({
+        validFrom: "2020-11-16T06:26:19.160Z",
+        url: "https://foo.bar/uuid",
+        nric: "T1234567A",
+        passportNumber: "E7831177G",
+        testData: [mockTestData],
       });
     } catch (error) {
-      // error should occu
+      // error should occur
+      expect(error).not.toBeNull();
     } finally {
       expect(mockPublish).not.toHaveBeenCalled();
     }
   });
+
   it("should create the right notification message if there are 2 tests", async () => {
     mockPublish.mockResolvedValue({ MessageId: "foobar" });
     await notifyPdt({
