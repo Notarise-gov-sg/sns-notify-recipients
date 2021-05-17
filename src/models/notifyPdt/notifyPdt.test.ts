@@ -132,20 +132,16 @@ describe("notifyPdt", () => {
 
   it("should skip sending an SPM notification if nric fails checksum", async () => {
     mockPublish.mockResolvedValue({ MessageId: "foobar" });
-    try {
-      await notifyPdt({
+    await expect(
+      notifyPdt({
         validFrom: "2020-11-16T06:26:19.160Z",
         url: "https://foo.bar/uuid",
         nric: "T1234567A",
         passportNumber: "E7831177G",
         testData: [mockTestData],
-      });
-    } catch (error) {
-      // error should occur
-      expect(error).not.toBeNull();
-    } finally {
-      expect(mockPublish).not.toHaveBeenCalled();
-    }
+      })
+    ).rejects.toThrow("Skipped SPM notification for reasons mentioned above in isNRICValid()");
+    expect(mockPublish).not.toHaveBeenCalled();
   });
 
   it("should create the right notification message if there are 2 tests", async () => {
