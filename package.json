@@ -48,9 +48,11 @@
     "generator-nod"
   ],
   "dependencies": {
+    "@types/intl": "^1.2.0",
     "aws-sdk": "^2.655.0",
     "aws-xray-sdk-core": "3.2.0",
     "debug": "4.3.1",
+    "intl": "^1.2.5",
     "qrcode": "^1.4.4",
     "runtypes": "5.0.1"
   },
