@@ -4,6 +4,7 @@ import { getSpmTemplateV4, SpmPayload } from "../templates/vaccine";
 import { config } from "../../config";
 import { getLogger } from "../../util/logger";
 import { Vaccination } from "../../types";
+import { isNRICValid } from "../../services/validateNRIC";
 
 const { trace } = getLogger("src/models/notifyRecipient");
 
@@ -26,16 +27,17 @@ export const notifyVaccine = async ({
   validFrom,
   vaccinationEffectiveDate,
 }: NotifyVaccineProps) => {
-  if (!nric) {
-    trace("Skipping SPM notification as the cert doesnt contain an NRIC");
-    return;
+  if (!isNRICValid(nric)) {
+    trace("Skipping SPM notification");
+    throw new Error("Skipped SPM notification for reasons mentioned above in isNRICValid()");
   }
+
   const qrCode = await QrCode.toBuffer(url);
   const qrCodeStr = `data:image/png;base64, ${qrCode.toString("base64")}`;
   const template = getSpmTemplateV4(name, qrCodeStr, passportNumber, vaccinations, validFrom, vaccinationEffectiveDate);
   const notification: SpmPayload = {
     notification_req: {
-      uin: nric,
+      uin: nric as string,
       channel_mode: "SPM",
       delivery: "IMMEDIATE",
       template_layout: [template],

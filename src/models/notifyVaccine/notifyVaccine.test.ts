@@ -1,3 +1,4 @@
+import NRIC from "nric";
 import { notifyVaccine } from "./notifyVaccine";
 import { publish } from "../../services/sns";
 import { Vaccination } from "../../types";
@@ -30,6 +31,8 @@ jest.mock("../../config", () => ({
   },
 }));
 
+const nric = NRIC.generateNRIC();
+
 const mockPublish = publish as jest.Mock;
 const mockVaccination: Vaccination = {
   vaccineCode: "vaccineCode",
@@ -50,7 +53,7 @@ describe("notifyVaccine", () => {
       name: "Person",
       validFrom: "2021-03-31T16:01:00.000Z",
       url: "https://foo.bar/uuid",
-      nric: "S9098989Z",
+      nric,
       passportNumber: "E7831177G",
       vaccinations: [mockVaccination],
       vaccinationEffectiveDate: "2021-03-31T16:01:00.000Z",
@@ -88,7 +91,7 @@ describe("notifyVaccine", () => {
               },
             ],
             "title": "COVID-19 Vaccination (Verified copy)",
-            "uin": "S9098989Z",
+            "uin": "${nric}",
           },
         },
       ]
@@ -97,14 +100,16 @@ describe("notifyVaccine", () => {
   });
 
   it("should skip sending an SPM notification if healthcert does not contain an NRIC", async () => {
-    await notifyVaccine({
-      name: "Person",
-      validFrom: "2021-04-01T00:00:00.000Z",
-      url: "https://foo.bar/uuid",
-      passportNumber: "E7831177G",
-      vaccinations: [mockVaccination],
-      vaccinationEffectiveDate: "2021-04-01T08:00:00.000Z",
-    });
+    await expect(
+      notifyVaccine({
+        name: "Person",
+        validFrom: "2021-04-01T00:00:00.000Z",
+        url: "https://foo.bar/uuid",
+        passportNumber: "E7831177G",
+        vaccinations: [mockVaccination],
+        vaccinationEffectiveDate: "2021-04-01T08:00:00.000Z",
+      })
+    ).rejects.toThrow("Skipped SPM notification for reasons mentioned above in isNRICValid()");
     expect(mockPublish).not.toHaveBeenCalled();
   });
 });
