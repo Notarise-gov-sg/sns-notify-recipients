@@ -1,9 +1,5 @@
-import { add } from "date-fns";
-import { utcToZonedTime, format } from "date-fns-tz";
+import Intl from "intl";
 import { config } from "../config";
-
-const pattern = "d MMMM yyyy";
-const timeZone = "Asia/Singapore";
 
 /**
  * Converts a Date object to a formatted date string (in SGT).
@@ -12,8 +8,12 @@ const timeZone = "Asia/Singapore";
  * @returns {string} Returns date format in d MMMM yyy.
  */
 const dateToStr = (date: Date): string => {
-  const zonedDate = utcToZonedTime(date, timeZone);
-  return format(zonedDate, pattern);
+  const dateFormatter = new Intl.DateTimeFormat("en-SG", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  return dateFormatter.format(date);
 };
 
 /**
@@ -27,7 +27,10 @@ const dateToStr = (date: Date): string => {
 const calcExpiry = (startDate: Date): Date => {
   const { validityInDays } = config.vaccination;
 
-  return add(startDate, { days: validityInDays });
+  const newDate = new Date(startDate);
+  newDate.setDate(newDate.getDate() + validityInDays);
+
+  return newDate;
 };
 
 export { dateToStr, calcExpiry };
