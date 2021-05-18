@@ -29,7 +29,7 @@ export const notifyVaccine = async ({
 }: NotifyVaccineProps) => {
   if (!isNRICValid(nric)) {
     trace("Skipping SPM notification");
-    throw new Error("Skipped SPM notification for reasons mentioned above in isNRICValid()");
+    throw new Error("NRIC is invalid");
   }
 
   const qrCode = await QrCode.toBuffer(url);
