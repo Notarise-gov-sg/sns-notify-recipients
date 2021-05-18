@@ -55,6 +55,7 @@ export const notifyVaccine = async ({
       ],
     },
   };
+  trace(`Preparing to publish message...`);
   const { MessageId } = await publish(notification);
   trace(`Notification queued ${MessageId}`);
 };
