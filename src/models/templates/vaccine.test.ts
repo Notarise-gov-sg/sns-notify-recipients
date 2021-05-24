@@ -2,12 +2,7 @@ import { getSpmTemplateV4 } from "./vaccine";
 import { Vaccination } from "../../types";
 
 const mockVaccination: Vaccination = {
-  vaccineCode: "vaccineCode",
   vaccineName: "vaccineName",
-  vaccineLot: "vaccineLot",
-  vaccinationDateTime: "2020-11-16T06:26:19.160Z",
-  vaccinationLocationCode: "vaccinationLocationCode",
-  vaccinationCountry: "Singapore",
 };
 
 describe("notifyVaccine", () => {

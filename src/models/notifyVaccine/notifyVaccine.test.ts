@@ -35,12 +35,7 @@ const nric = NRIC.generateNRIC();
 
 const mockPublish = publish as jest.Mock;
 const mockVaccination: Vaccination = {
-  vaccineCode: "vaccineCode",
   vaccineName: "vaccineName",
-  vaccineLot: "vaccineLot",
-  vaccinationDateTime: "2020-11-16T06:26:19.160Z",
-  vaccinationLocationCode: "vaccinationLocationCode",
-  vaccinationCountry: "Singapore",
 };
 
 describe("notifyVaccine", () => {

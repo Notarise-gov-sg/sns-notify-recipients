@@ -34,19 +34,8 @@ const nric = NRIC.generateNRIC();
 
 const mockPublish = publish as jest.Mock;
 const mockTestData: TestData = {
-  provider: "{}",
-  lab: "{}",
-  swabType: "a",
   patientName: "Person",
   swabCollectionDate: "testdatetime1",
-  performerName: "",
-  performerMcr: "",
-  observationDate: "",
-  nric,
-  nationality: "",
-  gender: "",
-  passportNumber: "",
-  birthDate: "{}",
   testType: "test1",
   testResult: "Negative",
 };
