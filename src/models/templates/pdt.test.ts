@@ -2,19 +2,8 @@ import { getSpmTemplateV2V3 } from "./pdt";
 import { TestData } from "../../types";
 
 const mockTestData: TestData = {
-  provider: "{}",
-  lab: "{}",
-  swabType: "a",
   patientName: "Person",
   swabCollectionDate: "testdatetime1",
-  performerName: "",
-  performerMcr: "",
-  observationDate: "",
-  nric: "a",
-  nationality: "",
-  gender: "",
-  passportNumber: "",
-  birthDate: "{}",
   testType: "test1",
   testResult: "Negative",
 };
