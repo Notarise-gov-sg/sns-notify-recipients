@@ -33,13 +33,13 @@ describe("notifyPdt", () => {
         [
           {
             ...mockTestData,
-            testType: "REAL TIME RT-PCR SWAB",
+            testType: "Reverse transcription polymerase chain reaction (rRT-PCR) test",
             testResult: "Negative",
           },
           {
             ...mockTestData,
             swabCollectionDate: "testdatetime2",
-            testType: "SEROLOGY",
+            testType: "Reverse transcription polymerase chain reaction (rRT-PCR) test 2",
             testResult: "Negative",
           },
         ],
@@ -54,10 +54,10 @@ describe("notifyPdt", () => {
         name: "Person",
         testdatetime: "testdatetime1",
         testresult: "Negative",
-        testtype: "COVID-19 PCR TEST RESULT",
+        testtype: "Reverse transcription polymerase chain reaction (rRT-PCR) test",
         testdatetime2: "testdatetime2",
         testresult2: "Negative",
-        testtype2: "COVID-19 SEROLOGY TEST RESULT",
+        testtype2: "Reverse transcription polymerase chain reaction (rRT-PCR) test 2",
         title: "COVID-19 HEALTHCERT",
       },
     });

@@ -92,12 +92,7 @@ export const getSpmTemplateV2V3 = (
           name: testData[0].patientName,
           passport: passportNumber,
           testresult: testData[0].testResult,
-          testtype:
-            testData[0].testType === "REAL TIME RT-PCR SWAB"
-              ? "COVID-19 PCR TEST RESULT"
-              : testData[0].testType === "SEROLOGY"
-              ? "COVID-19 SEROLOGY TEST RESULT"
-              : testData[0].testType,
+          testtype: testData[0].testType,
           testdatetime: testData[0].swabCollectionDate,
         },
       };
@@ -111,20 +106,10 @@ export const getSpmTemplateV2V3 = (
           name: testData[0].patientName,
           passport: passportNumber,
           testresult: testData[0].testResult,
-          testtype:
-            testData[0].testType === "REAL TIME RT-PCR SWAB"
-              ? "COVID-19 PCR TEST RESULT"
-              : testData[0].testType === "SEROLOGY"
-              ? "COVID-19 SEROLOGY TEST RESULT"
-              : testData[0].testType,
+          testtype: testData[0].testType,
           testdatetime: testData[0].swabCollectionDate,
           testresult2: testData[1].testResult,
-          testtype2:
-            testData[1].testType === "REAL TIME RT-PCR SWAB"
-              ? "COVID-19 PCR TEST RESULT"
-              : testData[1].testType === "SEROLOGY"
-              ? "COVID-19 SEROLOGY TEST RESULT"
-              : testData[1].testType,
+          testtype2: testData[1].testType,
           testdatetime2: testData[1].swabCollectionDate,
         },
       };
