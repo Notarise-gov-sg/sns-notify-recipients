@@ -61,6 +61,6 @@ NOTIFICATION_TEMPLATE_ID=000
 
 2. Raise a PR.
 
-3. Upon approval, merge PR into `master` branch.
+3. Upon approval, "squash and merge" PR into `master` branch.
 
-4. Publish a release to NPM by manually running `CI - Release` workflow in GitHub Actions.
+4. A new release will be automatically published by the workflow in GitHub Actions.
