@@ -45,7 +45,7 @@ try {
     url: string;
     expiry: number;// Epoch time
   }
-  await notifyVaccine(notifyVaccineProps);
+  await notifyHealthCert(notifyHealthCertProps);
 
 } catch (e) {
   errorWithRef(`Notification error: ${e.message}`);
