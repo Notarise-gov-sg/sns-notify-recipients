@@ -42,6 +42,8 @@ try {
 
   /* Notify recipient of Health cert for new SPM wallet */
   interface NotifyHealthCertProps {
+    version: string; // should be "1.0", "2.0"
+    type: string; // should be "VAC", "ART", "PCR"
     url: string;
     expiry: number;// Epoch time
   }

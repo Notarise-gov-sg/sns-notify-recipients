@@ -36,6 +36,8 @@ describe("notifyPdt", () => {
   it("should send the right SPM notification if healthcert contains an NRIC", async () => {
     mockPublish.mockResolvedValue({ MessageId: "foobar" });
     await notifyHealthCert({
+      version: "1.0",
+      type: "VAC",
       url: "https://foo.bar/uuid",
       expiry: 1631605597,
     });
@@ -44,7 +46,9 @@ describe("notifyPdt", () => {
         Object {
           "notification_req": Object {
             "expiry": 1631605597,
+            "type": "VAC",
             "url": "https://foo.bar/uuid",
+            "version": "1.0",
           },
         },
       ]
