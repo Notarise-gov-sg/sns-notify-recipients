@@ -39,6 +39,14 @@ try {
     vaccinationEffectiveDate: string; // ISO String
   }
   await notifyVaccine(notifyVaccineProps);
+
+  /* Notify recipient of Health cert for new SPM wallet */
+  interface NotifyHealthCertProps {
+    url: string;
+    expiry: number;// Epoch time
+  }
+  await notifyHealthCert(notifyHealthCertProps);
+
 } catch (e) {
   errorWithRef(`Notification error: ${e.message}`);
 }
