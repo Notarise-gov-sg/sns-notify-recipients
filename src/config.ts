@@ -28,6 +28,10 @@ const generateConfig = () => ({
       process.env.NOTIFICATION_TOPIC_ARN,
       "arn:aws:sns:ap-southeast-1:000000000000:PLACEHOLDER_SNS_TOPIC"
     ),
+    healthCertTopicArn: getDefaultIfUndefined(
+      process.env.HEALTH_CERT_NOTIFICATION_TOPIC_ARN,
+      "arn:aws:sns:ap-southeast-1:000000000000:PLACEHOLDER_SNS_TOPIC"
+    ),
   },
   vaccination: {
     validityInDays: 14,
