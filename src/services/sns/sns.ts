@@ -12,3 +12,12 @@ export const publish = (message: any) => {
     })
     .promise();
 };
+
+export const publishHealthCert = (message: any) => {
+  return sns
+    .publish({
+      Message: JSON.stringify(message),
+      TopicArn: config.notification.healthCertTopicArn,
+    })
+    .promise();
+};

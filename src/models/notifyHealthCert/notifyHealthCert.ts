@@ -1,4 +1,4 @@
-import { publish } from "../../services/sns";
+import { publishHealthCert } from "../../services/sns";
 import { getLogger } from "../../util/logger";
 
 const { trace } = getLogger("src/models/notifyHealthCert");
@@ -11,7 +11,7 @@ interface NotifyHealthCertProps {
 }
 
 export const notifyHealthCert = async ({ version, type, url, expiry }: NotifyHealthCertProps) => {
-  const { MessageId } = await publish({
+  const { MessageId } = await publishHealthCert({
     notification_req: {
       version,
       type,

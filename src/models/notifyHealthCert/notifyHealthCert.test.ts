@@ -1,5 +1,5 @@
 import { notifyHealthCert } from "./notifyHealthCert";
-import { publish } from "../../services/sns";
+import { publishHealthCert } from "../../services/sns";
 
 jest.mock("../../services/sns");
 jest.mock("../../config", () => ({
@@ -27,21 +27,21 @@ jest.mock("../../config", () => ({
   },
 }));
 
-const mockPublish = publish as jest.Mock;
+const mockPublishHealthCert = publishHealthCert as jest.Mock;
 
 describe("notifyPdt", () => {
   beforeEach(() => {
-    mockPublish.mockReset();
+    mockPublishHealthCert.mockReset();
   });
   it("should send the right SPM notification if healthcert contains an NRIC", async () => {
-    mockPublish.mockResolvedValue({ MessageId: "foobar" });
+    mockPublishHealthCert.mockResolvedValue({ MessageId: "foobar" });
     await notifyHealthCert({
       version: "1.0",
       type: "VAC",
       url: "https://foo.bar/uuid",
       expiry: 1631605597,
     });
-    expect(mockPublish.mock.calls[0]).toMatchInlineSnapshot(`
+    expect(mockPublishHealthCert.mock.calls[0]).toMatchInlineSnapshot(`
       Array [
         Object {
           "notification_req": Object {
