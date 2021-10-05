@@ -46,6 +46,8 @@ try {
     type: string; // should be "VAC", "ART", "PCR"
     url: string;
     expiry: number;// Epoch time
+    uin: string;
+    relationship?: string;// (Optional) should be "self", "child"
   }
   await notifyHealthCert(notifyHealthCertProps);
 
