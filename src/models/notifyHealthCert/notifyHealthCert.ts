@@ -20,7 +20,7 @@ export const notifyHealthCert = async ({ uin, version, type, url, expiry, relati
       type,
       url,
       expiry,
-      relationship
+      relationship,
     },
   });
   trace(`Notification queued ${MessageId}`);

@@ -40,7 +40,7 @@ describe("notifyPdt", () => {
       type: "VAC",
       url: "https://foo.bar/uuid",
       expiry: 1631605597,
-      uin: "S3100052A"
+      uin: "S3100052A",
     });
     expect(mockPublishHealthCert.mock.calls[0]).toMatchInlineSnapshot(`
       Array [
