@@ -7,21 +7,19 @@ const { trace } = getLogger("src/services/sns");
 const sns = new AWS.SNS(config.notification.sns) as AWSTypes.SNS;
 
 export const publish = (message: any) => {
-  trace(`Publising Notification Arn : ${config.notification.topicArn}`);
-  return sns
-    .publish({
-      Message: JSON.stringify(message),
-      TopicArn: config.notification.topicArn,
-    })
-    .promise();
+  const publishMessage = {
+    Message: JSON.stringify(message),
+    TopicArn: config.notification.topicArn,
+  };
+  trace(`Publishing Notification : ${JSON.stringify(publishMessage)}`);
+  return sns.publish(publishMessage).promise();
 };
 
 export const publishHealthCert = (message: any) => {
-  trace(`Publising Healthcert Notification Arn : ${config.notification.healthCertTopicArn}`);
-  return sns
-    .publish({
-      Message: JSON.stringify(message),
-      TopicArn: config.notification.healthCertTopicArn,
-    })
-    .promise();
+  const publishMessage = {
+    Message: JSON.stringify(message),
+    TopicArn: config.notification.healthCertTopicArn,
+  };
+  trace(`Publishing Healthcert Notification : ${JSON.stringify(publishMessage)}`);
+  return sns.publish(publishMessage).promise();
 };
