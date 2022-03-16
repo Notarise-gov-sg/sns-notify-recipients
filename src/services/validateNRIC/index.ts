@@ -9,11 +9,11 @@ export const isNRICValid = (nric: string | null | undefined): boolean => {
     error("cert doesnt contain an NRIC");
     return false;
   }
-  // nric must start with  S/T/F/G
+  // nric must start with  S/T/F/G/M
   // the nric lib is less restrictive
-  const regex = /[STFG]\w+/;
+  const regex = /[STFGM]\w+/;
   if (regex.test(nric) === false) {
-    error("NRIC does not start with  S/T/F/G");
+    error("NRIC does not start with  S/T/F/G/M");
     return false;
   }
 

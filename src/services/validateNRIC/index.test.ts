@@ -6,7 +6,7 @@ describe("test isNRICValid()", () => {
     expect(isNRICValid(nric)).toBe(false);
   });
 
-  it("isNRICValid() should return false if nric does not start with  S/T/F/G", () => {
+  it("isNRICValid() should return false if nric does not start with  S/T/F/G/M", () => {
     const nric: string | null = "A9377138I";
     expect(isNRICValid(nric)).toBe(false);
   });
