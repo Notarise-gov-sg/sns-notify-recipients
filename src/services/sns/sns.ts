@@ -1,23 +1,25 @@
-import * as AWSTypes from "aws-sdk";
+import { SNSClient, PublishCommand } from "@aws-sdk/client-sns";
+import AWSXRay from "aws-xray-sdk-core";
 import { config } from "../../config";
-import { AWS } from "../awsSdk";
 
-const sns = new AWS.SNS(config.notification.sns) as AWSTypes.SNS;
+let sns = new SNSClient(config.notification.sns);
 
-export const publish = (message: any) => {
-  return sns
-    .publish({
-      Message: JSON.stringify(message),
-      TopicArn: config.notification.topicArn,
-    })
-    .promise();
+sns = AWSXRay.captureAWSv3Client(sns);
+
+export const publish = async (message: any) => {
+  const command = new PublishCommand({
+    Message: JSON.stringify(message),
+    TopicArn: config.notification.topicArn,
+  });
+
+  return sns.send(command);
 };
 
-export const publishHealthCert = (message: any) => {
-  return sns
-    .publish({
-      Message: JSON.stringify(message),
-      TopicArn: config.notification.healthCertTopicArn,
-    })
-    .promise();
+export const publishHealthCert = async (message: any) => {
+  const command = new PublishCommand({
+    Message: JSON.stringify(message),
+    TopicArn: config.notification.healthCertTopicArn,
+  });
+
+  return sns.send(command);
 };
