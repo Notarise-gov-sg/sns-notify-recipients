@@ -4,17 +4,17 @@ name: CI - Master
 # events but only for the master branch
 on:
   push:
-    branches: [master]
+    branches: [master,beta,alpha]
 
 jobs:
   test:
     name: Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: "12.x"
+          node-version: "18.x"
       - run: npm ci
       - run: npm run lint
       - run: npm run type-check
@@ -24,12 +24,12 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: "12.x"
+          node-version: "18.x"
       - run: npm ci
       - run: npm run build
       - run: npx semantic-release
