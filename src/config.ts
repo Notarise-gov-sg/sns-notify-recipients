@@ -1,5 +1,3 @@
-import * as AWS from "aws-sdk";
-
 // this function exists because serverless gives a string of "undefined" for unpopulated values
 // https://github.com/serverless/serverless/issues/3491
 const getDefaultIfUndefined = (envVar: string | undefined, defaultValue: string) => {
@@ -10,7 +8,7 @@ const getSnsConfig = () =>
   process.env.IS_OFFLINE
     ? {
         region: getDefaultIfUndefined(process.env.SNS_REGION, "ap-southeast-1"),
-        endpoint: new AWS.Endpoint("http://localhost:4566"),
+        endpoint: "http://localhost:4566",
         accessKeyId: "S3RVER",
         secretAccessKey: "S3RVER",
       }
