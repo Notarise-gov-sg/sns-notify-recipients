@@ -36,10 +36,10 @@
     "generator-nod"
   ],
   "dependencies": {
-    "@aws-sdk/client-sns": "^3.282.0",
-    "@aws-sdk/types": "^3.272.0",
-    "aws-sdk": "^2.1330.0",
-    "aws-xray-sdk-core": "^3.4.1",
+    "@aws-sdk/client-sns": "^3.473.0",
+    "@aws-sdk/types": "^3.468.0",
+    "aws-sdk": "^2.1518.0",
+    "aws-xray-sdk-core": "^3.5.3",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^1.1.6",
     "debug": "^4.3.4",
